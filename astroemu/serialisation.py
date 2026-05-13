@@ -115,7 +115,7 @@ def load(path: str) -> dict:
 
     For each saved dataset, this function attempts to reconstruct a
     SpectrumDataset using the saved file paths and pipeline. If any files
-    are missing a UserWarning is raised and the raw config dict is returned
+    are missing the raw config dict is returned
     under the dataset key instead.
 
     Args:
