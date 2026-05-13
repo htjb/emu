@@ -6,5 +6,10 @@
 
 ::: astroemu.normalisation
 
-::: astroemu.utils
+::: astroemu.train
 
+::: astroemu.losses
+
+::: astroemu.serialisation
+
+::: astroemu.utils

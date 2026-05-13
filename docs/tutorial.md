@@ -192,6 +192,19 @@ for y_flat, inputs in test_dataset.get_batch_iterator(
     preds = mlp(best_params, inputs, act="relu")  # (batch*54, 1)
     preds = preds.squeeze(-1)                      # (batch*54,)
 
+    # In tiled mode, inputs has shape (batch * n_k, n_params + 1)
+    # First column is x, remaining columns are params
+    x_tiled = inputs[:, 0]
+    params_tiled = inputs[:, 1:]
+
+    # Undo normalisation (reverse pipeline order)
+    for pipe in reversed(pipeline):
+        preds, x_tiled, params_tiled = pipe.backward(
+            preds, x_tiled, params_tiled
+        )
+        y_flat, _, _ = pipe.backward(y_flat, x_tiled, params_tiled)
+ 
+
     # Undo normalisation (reverse pipeline order)
     for pipe in reversed(pipeline):
         preds, _, _ = pipe.backward(preds, x, inputs)
