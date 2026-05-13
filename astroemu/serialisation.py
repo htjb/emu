@@ -3,7 +3,6 @@
 import io
 import json
 import pickle
-import warnings
 import zipfile
 from pathlib import Path
 
@@ -116,7 +115,7 @@ def load(path: str) -> dict:
 
     For each saved dataset, this function attempts to reconstruct a
     SpectrumDataset using the saved file paths and pipeline. If any files
-    are missing a UserWarning is raised and the raw config dict is returned
+    are missing the raw config dict is returned
     under the dataset key instead.
 
     Args:
@@ -175,20 +174,18 @@ def load(path: str) -> dict:
         if key not in config:
             continue
 
-        ds_config = config[key]
+        ds_config = config[key]  # config pertaining to this dataset split
+
+        # look for the files on the system
         files = ds_config["files"]
         missing = [f for f in files if not Path(f).exists()]
 
         if missing:
-            warnings.warn(
-                f"{len(missing)}/{len(files)} data files for {split}_dataset "
-                f"could not be found (e.g. '{missing[0]}'). Returning the "
-                f"config dict under '{key}' instead of a SpectrumDataset.",
-                UserWarning,
-                stacklevel=2,
-            )
+            # if the files can't be found
+            # return the config dict for this dataset
             result[key] = ds_config
         else:
+            # if all files are found, reconstruct the SpectrumDataset
             result[key] = SpectrumDataset(
                 files=files,
                 x=ds_config["x"],

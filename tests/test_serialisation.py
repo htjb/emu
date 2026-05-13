@@ -231,8 +231,7 @@ def test_load_missing_files_returns_config_dict() -> None:
             val_dataset=val_ds,
             test_dataset=test_ds,
         )
-        with pytest.warns(UserWarning, match="could not be found"):
-            result = load(path)
+        result = load(path)
 
     assert isinstance(result["train_dataset"], dict), (
         "train_dataset should fall back to a"
