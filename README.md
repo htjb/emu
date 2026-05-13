@@ -1,6 +1,6 @@
 # astroemu — Next Generation Emulators for Cosmology and Astrophysics
 
-[![version](https://img.shields.io/badge/version-0.4.1-blue)](https://github.com/htjb/astroemu)
+[![version](https://img.shields.io/badge/version-0.4.2-blue)](https://github.com/htjb/astroemu)
 [![docs](https://readthedocs.org/projects/astroemu/badge/?version=latest)](https://astroemu.readthedocs.io/en/latest/)
 [![license](https://img.shields.io/github/license/htjb/astroemu)](https://github.com/htjb/astroemu/blob/main/LICENSE)
 

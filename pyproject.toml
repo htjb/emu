@@ -1,6 +1,6 @@
 [project]
 name = "astroemu"
-version = "0.4.1"
+version = "0.4.2"
 description = "Generalised framework for emulating spectral signals."
 readme = "README.md"
 requires-python = ">=3.11"
